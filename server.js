@@ -12,7 +12,12 @@ const ProductRoute = require("./routes/Product");
 const app = express();
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:8080",
+  })
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
