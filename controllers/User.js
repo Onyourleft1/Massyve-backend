@@ -73,9 +73,9 @@ module.exports = {
 
     const tkn = jwt.sign(payload, secretKey);
     res.cookie("token", tkn, {
-      httpOnly: true, // Cookie accessible only by the web server
+      // httpOnly: true, // Cookie accessible only by the web server
       secure: true, // Works in HTTPS environments
-      sameSite: "Strict", // Restricts the cookie to be sent in same-site requests
+      // sameSite: "Strict", // Restricts the cookie to be sent in same-site requests
       maxAge: 900000,
     });
     return res.status(200).json({ token: tkn });
