@@ -1,10 +1,12 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 require("dotenv").config();
 
 const UsersRoute = require("./routes/User");
+const ProductRoute = require("./routes/Product");
 
 const app = express();
 app.use(express.json());
@@ -13,10 +15,23 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 dotenv.config();
-const port = process.env.PORT;
 
+app.use("/Users", UsersRoute);
+app.use("/Products", ProductRoute);
+
+const uri =
+  "mongodb+srv://fadiajami82:CWtrfRiRsjHAt4ZT@massyve.cakimd5.mongodb.net/Node-API?retryWrites=true&w=majority&appName=Massyve";
+
+mongoose
+  .connect(uri)
+  .then(() => {
+    console.log("Connected To DB");
+  })
+  .catch((err) => {
+    console.log("connection failed");
+  });
+
+const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`server running on http://localhost:${port}`);
 });
-
-app.use("/Users", UsersRoute);
