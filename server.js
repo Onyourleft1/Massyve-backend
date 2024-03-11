@@ -15,7 +15,6 @@ app.use("/uploads", express.static("uploads"));
 app.use(
   cors({
     credentials: true,
-    origin: "https://massyve-backend.onrender.com",
   })
 );
 app.use(bodyParser.json());
